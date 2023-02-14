@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { Button  } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function NavButton() {
   return (
-    <NavLink to="/search-bar">
+    <NavLink to="/coctail">
       <Button variant="primary">Search</Button>
     </NavLink>
   );

@@ -1,10 +1,12 @@
-import NavBar from "./components/NavBar";
 import React from "react";
+import Main from "./components/Main";
 
 function App() {
   return (
     <div>
-      <NavBar></NavBar>
+      <React.StrictMode>
+        <Main></Main>
+      </React.StrictMode>
     </div>
   );
 }

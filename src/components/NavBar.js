@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
-import NavButton from "./NavButton";
+// import NavButton from "./NavButton";
 import Nav from "react-bootstrap/Nav";
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Categories from "../pages/Categories";
@@ -10,7 +10,7 @@ import Home from "../pages/Home";
 import Ingridients from "../pages/Ingridients";
 import BartenderBeginner from "../pages/BartenderBeginner";
 import BartenderVeteran from "../pages/BartenderVeteran";
-import SearhBar from "../pages/SearhBar";
+import CoctailDetails from "../pages/CoctailDetails";
 
 function NavBar() {
   return (
@@ -38,7 +38,7 @@ function NavBar() {
                 Bartender Veteran
               </Nav.Link>
             </Nav>
-            <Form className="d-flex">
+            {/* <Form className="d-flex">
               <Form.Control
                 type="search"
                 placeholder="Search Coctail by ID"
@@ -46,7 +46,7 @@ function NavBar() {
                 aria-label="Search"
               />
               <NavButton variant="outline-success">Searh</NavButton>
-            </Form>
+            </Form> */}
           </Container>
         </Navbar>
         <div>
@@ -63,7 +63,10 @@ function NavBar() {
               path="/bartender-veteran"
               element={<BartenderVeteran />}
             ></Route>
-            <Route path="/search-bar" element={<SearhBar />}></Route>
+            <Route
+              path="/coctail/:coctailId"
+              element={<CoctailDetails />}
+            ></Route>
           </Routes>
         </div>
       </BrowserRouter>
