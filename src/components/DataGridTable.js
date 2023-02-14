@@ -1,25 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { DataGrid } from "@mui/x-data-grid";
 
 function DataGridTable({ endpoint }) {
   const [data, setData] = useState([]);
+  const [hasImage, setHasImage] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       await axios.get(endpoint).then((response) => {
         setData(response.data.drinks);
+        setHasImage(
+          endpoint ===
+            "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+        );
       });
     };
 
     getData();
-  }, [endpoint, setData]);
+  }, [endpoint]);
 
   const rows = data.map((row, index) => {
-    return {
+    const newRow = {
       id: index + 1,
       ...row,
     };
+
+    if (hasImage && newRow.strIngredient1) {
+      newRow.image = `https://www.thecocktaildb.com/images/ingredients/${newRow.strIngredient1}-Small.png`;
+    }
+
+    return newRow;
   });
 
   const columns =
@@ -30,6 +41,22 @@ function DataGridTable({ endpoint }) {
           width: 150,
         }))
       : [];
+
+  if (hasImage) {
+    columns.push({
+      field: "image",
+      headerName: "Image",
+      sortable: false,
+      width: 100,
+      renderCell: (params) => (
+        <img
+          src={params.row.image}
+          alt={params.row.strIngredient1}
+          style={{ width: "100%" }}
+        />
+      ),
+    });
+  }
 
   return (
     <div style={{ height: 400, width: "100%" }}>
